@@ -38,3 +38,7 @@ song added by: ($user)
 discord.js
 
 hook up apis so when someone puts in a song it interacts with the music API. 
+
+
+
+
