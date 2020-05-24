@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = 'NzEwMzE2MTU4ODkyNjM4MjY5.XrzFYA.0TH6WfsBaNq0KjEPfqk9hihsmJs';
+const token;
 const ytdl = require("ytdl-core");
 const PREFIX = '!';
 var servers = {};
 const queue = new Map();
 const fs = require('fs');
-const API_KEY = `AIzaSyACPcsfJMR_c2YG0aMQ2eqrq77JW1vGVEc`;
+const API_KEY;
 const Youtube = require("simple-youtube-api");
 const youtube = new Youtube(API_KEY);
 const playlist = [];
