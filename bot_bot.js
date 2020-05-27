@@ -1,16 +1,16 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = 'NzEwMzE2MTU4ODkyNjM4MjY5.XrzFYA.0TH6WfsBaNq0KjEPfqk9hihsmJs';
 const ytdl = require("ytdl-core");
-const PREFIX = '!';
 var servers = {};
 const queue = new Map();
 const fs = require('fs');
-const API_KEY = `AIzaSyACPcsfJMR_c2YG0aMQ2eqrq77JW1vGVEc`;
-const Youtube = require("simple-youtube-api");
-const youtube = new Youtube(API_KEY);
+// const Youtube = require("simple-youtube-api");
+// const youtube = new Youtube(API_KEY);
 const playlist = [];
 const { meme } = require('memejs');
+const dotenv = require('dotenv').config();
+const token = process.env.BOT_TOKEN;
+const PREFIX = process.env.PREFIX;
 
 // look into stripe api
 
@@ -144,49 +144,49 @@ bot.on('message', message => {
         }
     }
 
-    if (command === 'playlist') {
-        if (!args) {
-            return message.channel.send("User must provide a youtube URL inorder to run this command");
-        }
-        if (!voiceChannel) {
-             return message.channel.send("User must be in a voice channel in order to run this command");
-        }
-        if (voiceChannel) {
-            const queueConstructor = {
-                textChannel: message.channel,
-                voiceChannel: voiceChannel,
-                connection: null,
-                songs: [],
-                volume: 100,
-                playing: true,
-                loop: false
-            };
-            queue.set(message.guild.id, queueConstructor);
-            function makeUrl(i) {
-                return new Promise(resolve => {
-                    var urls = args[i] ? args[i].replace(/<(.+)>/g, "$1") : "";
-                });
-            };
-            const playList = async (urls) => {
-                urls = await makeUrl();
-                console.log(urls);
-                var connection = voiceChannel.join()
-                queueConstructor.connection = connection
-                    .then(connection => {
-                        const stream = ytdl(urls, {
-                            filter: 'audioonly'
-                        });
-                        const dispatcher = connection.play(stream);
-                        dispatcher.on('end', () => {
-                            voiceChannel.leave();
-                        });
-                    });
-            };
-            for (var i = 0; i < args.length; i++) {
-                playList(i);
-            };
-        }
-    }        
+    // if (command === 'playlist') {
+    //     if (!args) {
+    //         return message.channel.send("User must provide a youtube URL inorder to run this command");
+    //     }
+    //     if (!voiceChannel) {
+    //          return message.channel.send("User must be in a voice channel in order to run this command");
+    //     }
+    //     if (voiceChannel) {
+    //         const queueConstructor = {
+    //             textChannel: message.channel,
+    //             voiceChannel: voiceChannel,
+    //             connection: null,
+    //             songs: [],
+    //             volume: 100,
+    //             playing: true,
+    //             loop: false
+    //         };
+    //         queue.set(message.guild.id, queueConstructor);
+    //         function makeUrl(i) {
+    //             return new Promise(resolve => {
+    //                 var urls = args[i] ? args[i].replace(/<(.+)>/g, "$1") : "";
+    //             });
+    //         };
+    //         const playList = async (urls) => {
+    //             urls = await makeUrl();
+    //             console.log(urls);
+    //             var connection = voiceChannel.join()
+    //             queueConstructor.connection = connection
+    //                 .then(connection => {
+    //                     const stream = ytdl(urls, {
+    //                         filter: 'audioonly'
+    //                     });
+    //                     const dispatcher = connection.play(stream);
+    //                     dispatcher.on('end', () => {
+    //                         voiceChannel.leave();
+    //                     });
+    //                 });
+    //         };
+    //         for (var i = 0; i < args.length; i++) {
+    //             playList(i);
+    //         };
+    //     }
+    // }        
 });
 
 bot.login(token);
