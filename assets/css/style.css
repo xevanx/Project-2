@@ -1,0 +1,13 @@
+img {
+    max-width: 55px;
+}
+
+img.activator {
+    max-width: 500px;
+    margin-top: 50px;
+}
+
+.container {
+    margin-left: 35%;
+    font-size: 30;
+}
